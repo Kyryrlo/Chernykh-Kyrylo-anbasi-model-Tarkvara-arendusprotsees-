@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Компьтерные_x0020_заказы.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Компьтерные_x0020_заказыStoreContainer">
+    <EntitySet Name="ArvutitellemusedSet" EntityType="Компьтерные_x0020_заказы.Store.ArvutitellemusedSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WhopackedSet" EntityType="Компьтерные_x0020_заказы.Store.WhopackedSet" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="Entity1Arvutitellemused" Association="Компьтерные_x0020_заказы.Store.Entity1Arvutitellemused">
+      <End Role="Entity1" EntitySet="WhopackedSet" />
+      <End Role="Arvutitellemused" EntitySet="ArvutitellemusedSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ArvutitellemusedSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Customer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Kirjeldus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Korpus" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Kuvar" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Pakitud" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Entity1_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WhopackedSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Chernykh_Kyrylo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Matvii_Savchenko" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Oleksii_Rudenkox" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Egor_Nedozim" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="Entity1Arvutitellemused">
+    <End Role="Entity1" Type="Компьтерные_x0020_заказы.Store.WhopackedSet" Multiplicity="1" />
+    <End Role="Arvutitellemused" Type="Компьтерные_x0020_заказы.Store.ArvutitellemusedSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Entity1">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Arvutitellemused">
+        <PropertyRef Name="Entity1_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Компьтерные_x0020_заказы" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Компьтерные_x0020_заказыContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ArvutitellemusedSet" EntityType="Компьтерные_x0020_заказы.Arvutitellemused" />
+          <EntitySet Name="WhopackedSet" EntityType="Компьтерные_x0020_заказы.Whopacked" />
+          <AssociationSet Name="Entity1Arvutitellemused" Association="Компьтерные_x0020_заказы.Entity1Arvutitellemused">
+            <End Role="Entity1" EntitySet="WhopackedSet" />
+            <End Role="Arvutitellemused" EntitySet="ArvutitellemusedSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Arvutitellemused">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Customer" Type="String" Nullable="false" />
+          <Property Name="Kirjeldus" Type="String" Nullable="false" />
+          <Property Name="Korpus" Type="String" Nullable="false" />
+          <Property Name="Kuvar" Type="String" Nullable="false" />
+          <Property Name="Pakitud" Type="String" Nullable="false" />
+          <NavigationProperty Name="Entity1" Relationship="Компьтерные_x0020_заказы.Entity1Arvutitellemused" FromRole="Arvutitellemused" ToRole="Entity1" />
+        </EntityType>
+        <EntityType Name="Whopacked">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Arvutitellemused" Relationship="Компьтерные_x0020_заказы.Entity1Arvutitellemused" FromRole="Entity1" ToRole="Arvutitellemused" />
+          <Property Name="Chernykh_Kyrylo" Type="String" Nullable="false" />
+          <Property Name="Matvii_Savchenko" Type="String" Nullable="false" />
+          <Property Name="Oleksii_Rudenkox" Type="String" Nullable="false" />
+          <Property Name="Egor_Nedozim" Type="String" Nullable="false" />
+        </EntityType>
+        <Association Name="Entity1Arvutitellemused">
+          <End Type="Компьтерные_x0020_заказы.Whopacked" Role="Entity1" Multiplicity="1" />
+          <End Type="Компьтерные_x0020_заказы.Arvutitellemused" Role="Arvutitellemused" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Компьтерные_x0020_заказыStoreContainer" CdmEntityContainer="Компьтерные_x0020_заказыContainer">
+    <EntitySetMapping Name="ArvutitellemusedSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Компьтерные_x0020_заказы.Arvutitellemused)">
+        <MappingFragment StoreEntitySet="ArvutitellemusedSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Customer" ColumnName="Customer" />
+          <ScalarProperty Name="Kirjeldus" ColumnName="Kirjeldus" />
+          <ScalarProperty Name="Korpus" ColumnName="Korpus" />
+          <ScalarProperty Name="Kuvar" ColumnName="Kuvar" />
+          <ScalarProperty Name="Pakitud" ColumnName="Pakitud" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WhopackedSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Компьтерные_x0020_заказы.Whopacked)">
+        <MappingFragment StoreEntitySet="WhopackedSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Chernykh_Kyrylo" ColumnName="Chernykh_Kyrylo" />
+          <ScalarProperty Name="Matvii_Savchenko" ColumnName="Matvii_Savchenko" />
+          <ScalarProperty Name="Oleksii_Rudenkox" ColumnName="Oleksii_Rudenkox" />
+          <ScalarProperty Name="Egor_Nedozim" ColumnName="Egor_Nedozim" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Entity1Arvutitellemused" TypeName="Компьтерные_x0020_заказы.Entity1Arvutitellemused" StoreEntitySet="ArvutitellemusedSet">
+      <EndProperty Name="Entity1">
+        <ScalarProperty Name="Id" ColumnName="Entity1_Id" />
+      </EndProperty>
+      <EndProperty Name="Arvutitellemused">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
